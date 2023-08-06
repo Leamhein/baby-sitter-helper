@@ -21,5 +21,5 @@ void disconnect_status_blink()
     {
         fadeAmount = -fadeAmount;
     }
-    delay(30);
+    delay(50);
 }

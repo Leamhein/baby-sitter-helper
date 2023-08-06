@@ -2,9 +2,11 @@
 #include <utils/BLE_setup.h>
 #include <statuses.h>
 #include <utils/actions.h>
+#include <utils/button_handler.h>
 
 void setup()
 {
+  pinMode(buttonPin, INPUT_PULLUP);
   pinMode(buttonLed, OUTPUT);
   pinMode(notificationLed, OUTPUT);
   BLESetup();
@@ -12,22 +14,14 @@ void setup()
 
 void loop()
 {
-  Serial.println(status_bus.get_status());
-
+  handleButtonPress();
   if (status_bus.get_status() == Disconnected)
   {
-    Serial.println("Dis");
     disconnect_status_blink();
   }
 
   if (status_bus.get_status() == Active)
   {
-    Serial.println("Act");
     active_status_blink();
-  }
-
-  if (status_bus.get_status() == Passive)
-  {
-    Serial.println("Pas");
   }
 }
