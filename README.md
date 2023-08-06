@@ -1,0 +1,1 @@
+![Alt text](/schematic_diagram/diagram.png?raw=true "Diagram")
