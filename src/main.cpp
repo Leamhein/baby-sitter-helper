@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <utils/BLE_setup.h>
 #include <statuses.h>
+#include <BLE_handler.h>
 #include <utils/actions.h>
 #include <utils/button_handler.h>
 
@@ -9,7 +9,7 @@ void setup()
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(buttonLed, OUTPUT);
   pinMode(notificationLed, OUTPUT);
-  BLESetup();
+  BLE_handler->setup();
 }
 
 void loop()

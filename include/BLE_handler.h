@@ -3,6 +3,8 @@
 #include <BLEUtils.h>
 #include <BLEServer.h>
 #include <statuses.h>
+#ifndef BLEHANDLER_H
+#define BLEHANDLER_H
 
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
@@ -32,7 +34,16 @@ class CharacteristicCallbacks : public BLECharacteristicCallbacks
     }
 };
 
-void BLESetup()
+class BLEHandler
+{
+    BLECharacteristic * Characteristic;
+
+public:
+    void setup();
+    void sendMessage(std::string);
+};
+
+void BLEHandler::setup()
 {
     Serial.begin(115200);
 
@@ -41,13 +52,27 @@ void BLESetup()
     BLEService *pService = pServer->createService(SERVICE_UUID);
     BLECharacteristic *pCharacteristic = pService->createCharacteristic(
         CHARACTERISTIC_UUID,
-        BLECharacteristic::PROPERTY_NOTIFY);
+        BLECharacteristic::PROPERTY_NOTIFY |
+        BLECharacteristic::PROPERTY_WRITE |
+        BLECharacteristic::PROPERTY_READ);
 
     pServer->setCallbacks(new ServerCallbacks());
     pCharacteristic->setCallbacks(new CharacteristicCallbacks());
-
+    pCharacteristic->setValue("Hello World");
     pService->start();
 
     BLEAdvertising *pAdvertising = pServer->getAdvertising();
     pAdvertising->start();
+
+    Characteristic = pCharacteristic;
+};
+
+void BLEHandler::sendMessage(std::string message)
+{
+    Characteristic->setValue(message);
+    Characteristic->notify();
 }
+
+extern BLEHandler* BLE_handler = new BLEHandler();
+
+#endif /* BLEHANDLER_H */
