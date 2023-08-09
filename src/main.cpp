@@ -6,6 +6,8 @@
 
 void setup()
 {
+  Serial.begin(115200);
+
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(buttonLed, OUTPUT);
   pinMode(notificationLed, OUTPUT);

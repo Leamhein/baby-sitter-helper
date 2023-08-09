@@ -40,13 +40,12 @@ class BLEHandler
 
 public:
     void setup();
+    void notify();
     void sendMessage(std::string);
 };
 
 void BLEHandler::setup()
 {
-    Serial.begin(115200);
-
     BLEDevice::init("BabySitterServer");
     BLEServer *pServer = BLEDevice::createServer();
     BLEService *pService = pServer->createService(SERVICE_UUID);
@@ -58,7 +57,6 @@ void BLEHandler::setup()
 
     pServer->setCallbacks(new ServerCallbacks());
     pCharacteristic->setCallbacks(new CharacteristicCallbacks());
-    pCharacteristic->setValue("Hello World");
     pService->start();
 
     BLEAdvertising *pAdvertising = pServer->getAdvertising();
@@ -66,6 +64,11 @@ void BLEHandler::setup()
 
     Characteristic = pCharacteristic;
 };
+
+void BLEHandler::notify()
+{
+    Characteristic->notify();
+}
 
 void BLEHandler::sendMessage(std::string message)
 {

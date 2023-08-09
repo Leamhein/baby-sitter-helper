@@ -15,7 +15,7 @@ void handleButtonPress()
         if (status_bus.get_status() == Passive)
         {
             Serial.println("send message");
-            BLE_handler->sendMessage("HELLO WORLD");
+            BLE_handler->notify();
         }
 
         if (status_bus.get_status() == Active)
