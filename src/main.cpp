@@ -15,13 +15,22 @@ void setup()
 void loop()
 {
   handleButtonPress();
-  if (status_bus.get_status() == Disconnected)
+  Statuses status = status_bus.get_status();
+
+  Serial.println(status);
+
+  if (status == Disconnected)
   {
     disconnect_status_blink();
   }
 
-  if (status_bus.get_status() == Active)
+  if (status == Active)
   {
     active_status_blink();
+  }
+
+  if (status == Passive)
+  {
+    turn_off_notification_led();
   }
 }

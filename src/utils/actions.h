@@ -13,6 +13,11 @@ void active_status_blink()
     delay(50);
 }
 
+void turn_off_notification_led()
+{
+    analogWrite(notificationLed, 0);
+}
+
 void disconnect_status_blink()
 {
     analogWrite(notificationLed, brightness);
