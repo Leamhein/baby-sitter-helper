@@ -1,8 +1,11 @@
 #include <Arduino.h>
 #include <statuses.h>
-#include <BLE_handler.h>
 #include <utils/actions.h>
 #include <utils/button_handler.h>
+#include <utils/communication_handler.h>
+#include <WiFi.h>
+#include "ESPNowW.h"
+#include <constants.h>
 
 void setup()
 {
@@ -11,7 +14,9 @@ void setup()
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(buttonLed, OUTPUT);
   pinMode(notificationLed, OUTPUT);
-  BLE_handler->setup();
+
+  Communication_handler->setup();
+
 }
 
 void loop()
@@ -19,11 +24,11 @@ void loop()
   handleButtonPress();
   Statuses status = status_bus.get_status();
 
-  Serial.println(status);
-
   if (status == Disconnected)
   {
+    Serial.println("Disconnected");
     disconnect_status_blink();
+    Communication_handler->reconnect();
   }
 
   if (status == Active)
@@ -35,4 +40,6 @@ void loop()
   {
     turn_off_notification_led();
   }
+
+  Communication_handler->sendMessage(21);
 }

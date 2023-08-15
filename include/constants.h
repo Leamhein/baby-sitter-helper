@@ -1,0 +1,4 @@
+#define BOARD_1_MAC "34:85:18:03:5B:90";
+#define BOARD_1_MAC_UINT8 {52, 133, 24, 3, 91, 144};
+#define BOARD_2_MAC "D4:F9:8D:04:49:38";
+#define BOARD_2_MAC_UINT8 {212, 249, 141, 4, 73, 56};
