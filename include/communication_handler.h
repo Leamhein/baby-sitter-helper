@@ -2,8 +2,10 @@
 #include "ESPNowW.h"
 #include <constants.h>
 #include <statuses.h>
+#ifndef COMMUNICATIONHANDLER_H
+#define COMMUNICATIONHANDLER_H
+
 uint8_t broadcastAddress[] = BOARD_1_MAC_UINT8;
-uint8_t incomingReadings;
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
 {
@@ -58,3 +60,5 @@ void CommunicationHandler::sendMessage(uint8_t message)
 }
 
 extern CommunicationHandler *Communication_handler = new CommunicationHandler();
+
+#endif

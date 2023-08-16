@@ -2,7 +2,7 @@
 #include <statuses.h>
 #include <utils/actions.h>
 #include <utils/button_handler.h>
-#include <utils/communication_handler.h>
+#include <communication_handler.h>
 #include <WiFi.h>
 #include "ESPNowW.h"
 #include <constants.h>
@@ -40,6 +40,4 @@ void loop()
   {
     turn_off_notification_led();
   }
-
-  Communication_handler->sendMessage(21);
 }

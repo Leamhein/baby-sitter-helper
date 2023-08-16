@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <statuses.h>
-#include <utils/communication_handler.h>
+#include <communication_handler.h>
 
 int buttonPin = D6;
 int lastState = LOW;
